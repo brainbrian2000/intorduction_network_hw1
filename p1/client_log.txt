@@ -1,0 +1,29 @@
+The Client is running..
+Question: 1+1
+Received the message from server: 
+Please input a question for calculation
+Get the answer from server: 
+2.0
+Do you wish to continue? (Y/N)
+Response to server prompt: Y
+Question: 2-4
+Received the message from server: 
+Please input a question for calculation
+Get the answer from server: 
+-2.0
+Do you wish to continue? (Y/N)
+Response to server prompt: Y
+Question: 3*5
+Received the message from server: 
+Please input a question for calculation
+Get the answer from server: 
+15.0
+Do you wish to continue? (Y/N)
+Response to server prompt: Y
+Question: 4/2
+Received the message from server: 
+Please input a question for calculation
+Get the answer from server: 
+2.0
+Do you wish to continue? (Y/N)
+Response to server prompt: N

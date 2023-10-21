@@ -17,16 +17,22 @@ with open('./client_log.txt', 'w') as logFile:
     # Configure the server IP with its corrosponding port number
     # Specify the TCP connection type and make connection to the server
     # TODO Start
-    HOST, PORT =
-    s =
+    HOST, PORT = "127.0.0.1", 10046
+    # HOST, PORT = "140.112.42.104", 7777
+    
+    s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    s.connect((HOST, PORT))
     # TODO End
 
 
     # You can change the test case or create other test cases on your own
-    with open('./p1_testcase', 'r') as Testcase:
+    filename = './p1_testcase'
+    # filename = './p1_testcase_self'
+    
+    with open(filename, 'r') as Testcase:
         for PreprocessingLine in Testcase:
             line = PreprocessingLine.strip()
-            time.sleep(3)
+            time.sleep(1)
 
             if line == "Y" or line == "N":
                 # If the line is "Y" or "N", treat it as a response to a server prompt
@@ -35,6 +41,7 @@ with open('./client_log.txt', 'w') as logFile:
 
                 # Send the response to the server
                 # TODO Start
+                s.send(response.encode())
                 # TODO End
             else:
                 # If not "Y" or "N," assume it's a mathematical expression
@@ -43,7 +50,7 @@ with open('./client_log.txt', 'w') as logFile:
 
                 # Receive the server's message
                 # TODO Start
-                server_message =
+                server_message = s.recv(1024).decode()
                 # TODO End
 
                 # Log the server's message
@@ -52,11 +59,14 @@ with open('./client_log.txt', 'w') as logFile:
 
                 # Send the question to the server
                 # TODO Start
+                # sending_message = input("input:\n")
+                sending_message = line
+                s.send(sending_message.encode())
                 # TODO End
 
                 # Receive and log the answer from the server
                 # TODO Start
-                ans =
+                ans = s.recv(1024).decode()
                 # TODO End
 
                 log_message(logFile, "Get the answer from server: ", RESET)
