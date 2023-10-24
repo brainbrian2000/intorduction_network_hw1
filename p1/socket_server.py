@@ -122,7 +122,7 @@ with open('./server_log.txt', 'w') as logFile:
 
                 # Terminate the process or continue
                 if ans.lower() != 'y':
-                    # client.close()
+                    client.close()
                     break
         except ConnectionResetError:
             print("Connection reset by peer")
