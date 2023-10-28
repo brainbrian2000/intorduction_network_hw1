@@ -11,7 +11,7 @@ def log_message(logFile, message, color=RESET):
     logFile.write(message + '\n')  # Write the unformatted message to the log file
     logFile.flush()
 
-with open('./client_log.txt', 'w') as logFile:
+with open('./b08209023_p1_client_result.txt', 'w') as logFile:
     log_message(logFile, "The Client is running..")
 
     # Configure the server IP with its corrosponding port number
@@ -22,6 +22,7 @@ with open('./client_log.txt', 'w') as logFile:
     
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     s.connect((HOST, PORT))
+    
     # TODO End
 
 
@@ -45,8 +46,6 @@ with open('./client_log.txt', 'w') as logFile:
                 # TODO End
             else:
                 # If not "Y" or "N," assume it's a mathematical expression
-                question = line
-                log_message(logFile, "Question: " + question)
 
                 # Receive the server's message
                 # TODO Start
@@ -57,6 +56,8 @@ with open('./client_log.txt', 'w') as logFile:
                 log_message(logFile, "Received the message from server: ", RESET)
                 log_message(logFile, server_message, RED)
 
+                question = line
+                log_message(logFile, "Question: " + question)
                 # Send the question to the server
                 # TODO Start
                 # sending_message = input("input:\n")

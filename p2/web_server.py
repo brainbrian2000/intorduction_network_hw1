@@ -109,9 +109,15 @@ while True:
             connectionSocket.send("HTTP/1.1 404 Not Found\n\n<h1>404 Not Found</h1>".encode())
             connectionSocket.close()
         else:
-            print(f"in Error: {arg}")
-            connectionSocket.send(f"HTTP/1.1 {arg}\n\n".encode())
-            connectionSocket.send(f"<h1>Get Error Code(Testing): {arg}</h1>".encode())
+            try:
+                arg = int(arg)
+                print(f"in Error: {arg}")
+                connectionSocket.send(f"HTTP/1.1 {arg}\n\n".encode())
+                connectionSocket.send(f"<h1>Get Error Code(Testing): {arg}</h1>".encode())
+            except:
+                connectionSocket.send("HTTP/1.1 404 Not Found\n\n<h1>404 Not Found</h1>".encode())
+                connectionSocket.close()
+                
         connectionSocket.close()
             
         pass
