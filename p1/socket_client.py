@@ -27,7 +27,7 @@ with open('./client_log.txt', 'w') as logFile:
 
     # You can change the test case or create other test cases on your own
     filename = './p1_testcase'
-    # filename = './p1_testcase_self'
+    # filename = './p1_testcase_total'
     
     with open(filename, 'r') as Testcase:
         for PreprocessingLine in Testcase:

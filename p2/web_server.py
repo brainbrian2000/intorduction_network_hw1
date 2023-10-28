@@ -39,11 +39,15 @@ while True:
         # Receive and decode the client's request
         # TODO Start
         message = connectionSocket.recv(1024).decode()
+        print("MESSAGE:")
+        print(message)
+        print("")
         # TODO End
 
         # If the message is empty, set it to a default value
         if message == "":
             message = "/ /"
+            filename = ""
         else:
         # Print the client's request message
             print(f"client's request message: \n {message}")
@@ -56,15 +60,19 @@ while True:
                 message_arr = message_arr_1[1].split("/")
                 filename = "."+message_arr_1[1]
                 # print(message_arr)
-                if(message_arr[1]=="index.html" or message_arr[1]=="/index" or message_arr[1]==""):
+                if(message_arr[1]=="index.html"):  # or message_arr[1]=="/index" or message_arr[1]==""):
                     filename = "index.html"
                 elif(message_arr[1]==""):
+                    connectionSocket.send("HTTP/1.1 404 Not Found\n\n<h1>404 Not Found</h1>".encode())
                     connectionSocket.close()
                     continue
                 elif(message_arr[1]=="test"):
                     raise NameError(message_arr[2])
                 else:
+                    # filename = ""
                     pass
+            else:
+                pass
         # TODO End
         print(f"Extract the filename: {filename}")
 
@@ -80,7 +88,9 @@ while True:
         http_inside = ""
         for msg in outputdata:
             # http_inside+=msg
-            connectionSocket.send((msg).encode())
+            connectionSocket.sendall((msg).encode())
+        # print(http_inside)
+        # connectionSocket.sendall(http_inside.encode())
         connectionSocket.close()
         f.close()
         # TODO End
@@ -96,15 +106,8 @@ while True:
         arg=Errorargs[0]
         print(f"in NameError: {arg}")
         if(arg=="404"):
-            connectionSocket.send("HTTP/1.1 404 Not Found\n\n".encode())
-            filename="no.html"
-            f = open(filename)
-            outputdata = f.readlines()
-            http_inside = ""
-            for msg in outputdata:
-                connectionSocket.send((msg).encode())
+            connectionSocket.send("HTTP/1.1 404 Not Found\n\n<h1>404 Not Found</h1>".encode())
             connectionSocket.close()
-            f.close()
         else:
             print(f"in Error: {arg}")
             connectionSocket.send(f"HTTP/1.1 {arg}\n\n".encode())
@@ -113,15 +116,7 @@ while True:
             
         pass
     except (OSError) as e:
-        connectionSocket.send("HTTP/1.1 404 Not Found\n\n".encode())
-        filename="no.html"
-        f = open(filename)
-        outputdata = f.readlines()
-        http_inside = ""
-        for msg in outputdata:
-            connectionSocket.send((msg).encode())
-        connectionSocket.close()
-        f.close()
+        connectionSocket.send("HTTP/1.1 404 Not Found\n\n<h1>404 Not Found</h1>".encode())
         connectionSocket.close()
     except Exception as e:
         connectionSocket.close()
