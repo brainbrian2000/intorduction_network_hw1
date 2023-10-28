@@ -12,7 +12,7 @@ HOST, PORT = "127.0.0.1",9999
 serverSocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 serverSocket.bind((HOST, PORT))
 serverSocket.listen(1)
-debug_msg=1
+debug_msg=0
 if(debug_msg):
     print("[DEBUG]")
     print("[END DEBUG]")
